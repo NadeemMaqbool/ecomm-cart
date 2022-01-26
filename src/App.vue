@@ -1,9 +1,35 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="container">
+        <h3>Simple Ecommerce</h3>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarsExampleDefault"
+        >
+          <ul class="navbar-nav m-auto">
+            <li class="nav-item active">
+              <router-link to="/products" class="nav-link">
+                Products
+              </router-link>
+            </li>
+
+            <li class="nav-item">
+              <router-link to="/cart" class="nav-link">Cart</router-link>
+            </li>
+          </ul>
+
+          <form class="form-inline my-2 my-lg-0">
+            <router-link class="btn btn-success btn-sm ml-3" to="/cart" >
+              <i class="fa fa-shopping-cart" ></i> Cart<span class="badge badge-light" >( )</span>
+            </router-link>
+          </form>
+        </div>
+      </div>
+    </nav>
   </div>
-  <router-view/>
+
+  <router-view />
 </template>
 
 <style>
@@ -12,7 +38,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #FFF;
 }
 
 #nav {
@@ -21,7 +47,6 @@
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
 }
 
 #nav a.router-link-exact-active {
