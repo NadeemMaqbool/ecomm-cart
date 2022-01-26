@@ -16,7 +16,7 @@
           </div>
           <div class="col-md-8 cart-panel ">
             <input type="number" class="col-8" v-model="quantity" />
-            <button class="btn btn-success btn-block">
+            <button @click="addToCart(product)" class="btn btn-success btn-block">
               Add to cart
             </button>
           </div>
@@ -37,6 +37,9 @@ export default {
   methods: {
     getImgUrl (name) {
       return require('../assets/img/' + name + '.jpg')
+    },
+    addToCart (product) {
+      this.$emit('add-to-cart', product, this.quantity)
     }
   }
 }
