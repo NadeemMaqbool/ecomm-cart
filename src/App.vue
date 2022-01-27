@@ -21,7 +21,7 @@
 
           <form class="form-inline my-2 my-lg-0">
             <router-link class="btn btn-success btn-sm ml-3" to="/cart" >
-              <i class="fa fa-shopping-cart" ></i> Cart<span class="badge badge-light" >( )</span>
+              <i class="fa fa-shopping-cart" ></i> Cart<span class="badge badge-light" >( {{ getCartLength() }} )</span>
             </router-link>
           </form>
         </div>
@@ -31,7 +31,23 @@
 
   <router-view />
 </template>
-
+<script>
+export default {
+  data () {
+    return {
+      cart: {},
+      cartSize: 0
+    }
+  },
+  methods: {
+    getCartLength () {
+      return Object.values(
+        JSON.parse(localStorage.getItem('cart')) ?? {}
+      ).length ?? 0
+    }
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
