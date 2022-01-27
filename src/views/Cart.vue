@@ -20,13 +20,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-for="(item, i) in cart" :key='i'>
                 <td></td>
-                <td>Cucumber</td>
-                <td>2</td>
-                <td class="text-right">20.3</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td class="text-right">{{ (item.price.USD * item.quantity).toFixed(2) }}</td>
                 <td class="text-right">
-                  <button class="btn btn-sm btn-danger">
+                  <button @click="removeItem(item.name)" class="btn btn-sm btn-danger">
                     <font-awesome-icon icon="trash" />
                   </button>
                 </td>
@@ -36,7 +36,7 @@
                 <td></td>
                 <td></td>
                 <td><strong>Total</strong></td>
-                <td class="text-right"><strong>€</strong></td>
+                <td class="text-right"><strong>{{ getTotalAmount() }} €</strong></td>
               </tr>
             </tbody>
           </table>
@@ -51,6 +51,20 @@ export default {
     return {
       cart: {}
     }
+  },
+  methods: {
+    getTotalAmount () {
+      return Object.values(this.cart)
+        .reduce((acc, item) => acc + (item.quantity * item.price.USD), 0)
+        .toFixed(2)
+    },
+    removeItem (itemName) {
+      delete this.cart[itemName]
+      localStorage.setItem('cart', JSON.stringify(this.cart))
+    }
+  },
+  beforeMount () {
+    this.cart = JSON.parse(localStorage.getItem('cart'))
   }
 }
 </script>
