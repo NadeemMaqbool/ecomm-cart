@@ -25,6 +25,7 @@ export default {
       cart: {}
     }
   },
+  
   methods: {
     addToCart (product, quantity) {
       this.cart = JSON.parse(localStorage.getItem('cart')) ?? {}
